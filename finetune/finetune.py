@@ -172,10 +172,10 @@ class DataCollatorForSupervisedDataset(object):
 
 def train_tokenize_function(examples, tokenizer):
     sources = [
-        build_instruction_prompt(instruction)
-        for instruction in examples['instruction']
+        build_instruction_prompt(problem)
+        for problem in examples['problem']
     ]
-    targets = [f"{output}\n{EOT_TOKEN}" for output in examples['output']]
+    targets = [f"{solution}\n{EOT_TOKEN}" for solution in examples['solution']]
     data_dict = preprocess(sources, targets, tokenizer)
     return data_dict
 
@@ -279,8 +279,7 @@ def train():
     model = build_model(model_args, training_args, resume_from_checkpoint_dir)
         
     raw_train_datasets = load_dataset(
-        'parquet',
-        data_files=data_args.data_path,
+        'open-r1/OpenR1-Math-220k',
         split="train",
         cache_dir=training_args.cache_dir
     )
