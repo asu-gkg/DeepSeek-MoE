@@ -2,7 +2,7 @@ import torch.nn as nn
 from model.layers.SkipRouter import SkipRouter
 from model.layers.DeepseekMLP import DeepseekMLP
 
-class SkipLayerMOE(nn.Module):
+class SkipLayerMoE(nn.Module):
     def __init__(self, hidden_size, num_experts, num_experts_per_token, shared_experts, intermediate_size, skip_threshold=0.2, skip_enabled=True):
         super().__init__()
         self.router = SkipRouter(hidden_size, num_experts, num_experts_per_token, skip_threshold, skip_enabled)
